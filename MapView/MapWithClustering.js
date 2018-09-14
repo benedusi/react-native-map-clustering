@@ -34,6 +34,7 @@ export default class MapWithClustering extends Component {
   }
 
   onRegionChangeComplete = (region) => {
+    //this.calculateClustersForMap(region);
     const { latitude, latitudeDelta, longitude, longitudeDelta } = this.state.currentRegion;
     if (region.longitudeDelta <= 80) {
       if ((Math.abs(region.latitudeDelta - latitudeDelta) > latitudeDelta / 8)
@@ -42,6 +43,9 @@ export default class MapWithClustering extends Component {
         this.calculateClustersForMap(region);
       }
     }
+    setTimeout(()=>{
+      this.calculateClustersForMap(region);
+    })
   };
 
   createMarkersOnMap = props => {
