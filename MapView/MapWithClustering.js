@@ -34,18 +34,15 @@ export default class MapWithClustering extends Component {
   }
 
   onRegionChangeComplete = (region) => {
-    //this.calculateClustersForMap(region);
-    const { latitude, latitudeDelta, longitude, longitudeDelta } = this.state.currentRegion;
-    if (region.longitudeDelta <= 80) {
-      if ((Math.abs(region.latitudeDelta - latitudeDelta) > latitudeDelta / 8)
-        || (Math.abs(region.longitude - longitude) >= longitudeDelta / 5)
-        || (Math.abs(region.latitude - latitude) >= latitudeDelta / 5)) {
-        this.calculateClustersForMap(region);
-      }
-    }
-    setTimeout(()=>{
-      this.calculateClustersForMap(region);
-    })
+    this.calculateClustersForMap(region);
+    // const { latitude, latitudeDelta, longitude, longitudeDelta } = this.state.currentRegion;
+    // if (region.longitudeDelta <= 80) {
+    //   if ((Math.abs(region.latitudeDelta - latitudeDelta) > latitudeDelta / 8)
+    //     || (Math.abs(region.longitude - longitude) >= longitudeDelta / 5)
+    //     || (Math.abs(region.latitude - latitude) >= latitudeDelta / 5)) {
+    //     this.calculateClustersForMap(region);
+    //   }
+    // }
   };
 
   createMarkersOnMap = props => {
