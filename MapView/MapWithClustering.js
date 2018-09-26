@@ -116,14 +116,13 @@ export default class MapWithClustering extends Component {
 
   calculateClustersForMap = async (currentRegion = this.state.currentRegion) => {
     let clusteredMarkers = [];
-
-    if (this.props.clustering && this.superCluster) {
+    if (currentRegion.latitudeDelta>(this.props.clusterDisableDelta||0.001) && this.props.clustering && this.superCluster) {
       const bBox = this.calculateBBox(this.state.currentRegion);
       let zoom = this.getBoundsZoomLevel(bBox, { height: h(100), width: w(100) });
       const clusters = await this.superCluster.getClusters([bBox[0], bBox[1], bBox[2], bBox[3]], zoom);
-
       clusteredMarkers = clusters.map(cluster => (<CustomMarker
         pointCount={cluster.properties.point_count}
+        showSingleMarkerCluster = {this.props.showSingleMarkerCluster}
         clusterId={cluster.properties.cluster_id}
         geometry={cluster.geometry}
         clusterStyle={this.state.clusterStyle}
@@ -132,7 +131,7 @@ export default class MapWithClustering extends Component {
         key={JSON.stringify(cluster.geometry) + cluster.properties.cluster_id + cluster.properties.point_count}
         onClusterPress={this.props.onClusterPress}
       />));
-    } else {
+      }else {
       clusteredMarkers = this.state.markers.map(marker => marker.marker);
     }
 

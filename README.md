@@ -41,6 +41,8 @@ import { Marker } from 'react-native-maps';
 <MapView
     region={{latitude: 52.5, longitude: 19.2,
              latitudeDelta: 8.5, longitudeDelta: 8.5}}
+             clusterDisableDelta = {0.1}
+			 showSingleMarkerCluster = {true}
     style={{width: mapWidth, height: mapHeight}}>
     <Marker coordinate={{latitude: 52.0, longitude: 18.2}} />
     <Marker coordinate={{latitude: 52.4, longitude: 18.7}} />

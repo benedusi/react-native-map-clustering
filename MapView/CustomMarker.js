@@ -9,18 +9,22 @@ export default class CustomMarker extends Component {
   }
 
   render() {
-    if (this.props.pointCount > 0) {
+    let pointCount = this.props.pointCount
+    if(pointCount===0 && this.props.showSingleMarkerCluster){
+      pointCount = 1
+    }
+    if (pointCount > 0) {
       return (
         <Marker
           coordinate={{
             longitude: this.props.geometry.coordinates[0],
             latitude: this.props.geometry.coordinates[1],
           }}
-          onPress={this.props.pointCount > 0 && this.props.onClusterPress}
+          onPress={pointCount > 0 && this.props.onClusterPress}
         >
           <View style={this.props.clusterStyle}>
             <Text style={this.props.clusterTextStyle}>
-              {this.props.pointCount}
+              {pointCount}
             </Text>
           </View>
         </Marker>
